@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.ttdemo.MyApplication;
 import com.ttdemo.R;
 import com.ttdemo.module.base.BaseFragment;
 
@@ -21,6 +22,7 @@ public class NewsTabLayout extends BaseFragment {
     LinearLayout linearLayout;
     @BindView(R.id.view_pager_news)
     ViewPager viewPager;
+    private ImageView add_channel_iv1;
 
     public static NewsTabLayout getInstance() {
         if (instance == null) {
@@ -32,12 +34,19 @@ public class NewsTabLayout extends BaseFragment {
 
     @Override
     protected void initData() {
+        initTab();
+    }
+
+    private void initTab() {
 
     }
 
     @Override
     protected void initView(View view) {
-   tab_layout.setupWithViewPager(viewPager);
+        tab_layout.setupWithViewPager(viewPager);
+        add_channel_iv1.setOnClickListener(v -> {
+            //todo
+        });
 
     }
 

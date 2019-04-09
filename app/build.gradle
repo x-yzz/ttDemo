@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -27,6 +27,16 @@ android {
     lintOptions {
         disable 'CheckResult'
     }
+    greendao {
+        //版本号，升级时可配置
+        schemaVersion 1
+
+        daoPackage 'com.ttdemo.greendao'
+        //生成源文件的路径。默认源文件目录是在build目录中的(build/generated/source/greendao)
+        targetGenDir 'src/main/java'
+    }
+
+
 }
 
 dependencies {
@@ -47,4 +57,6 @@ dependencies {
 
     implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
 }
