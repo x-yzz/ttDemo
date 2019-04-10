@@ -1,19 +1,18 @@
 package com.ttdemo.bean.greendao;
 
+
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class NewsChannelTable {
-    @Id(autoincrement = true)
-    Long id;
+
+    String id;
     String name;
-    String isEnable;
-    String position;
-    @Generated(hash = 1292959554)
-    public NewsChannelTable(Long id, String name, String isEnable,
-            String position) {
+    int isEnable;
+    int position;
+    @Generated(hash = 1573257868)
+    public NewsChannelTable(String id, String name, int isEnable, int position) {
         this.id = id;
         this.name = name;
         this.isEnable = isEnable;
@@ -22,10 +21,10 @@ public class NewsChannelTable {
     @Generated(hash = 518806505)
     public NewsChannelTable() {
     }
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getName() {
@@ -34,16 +33,17 @@ public class NewsChannelTable {
     public void setName(String name) {
         this.name = name;
     }
-    public String getIsEnable() {
+    public int getIsEnable() {
         return this.isEnable;
     }
-    public void setIsEnable(String isEnable) {
+    public void setIsEnable(int isEnable) {
         this.isEnable = isEnable;
     }
-    public String getPosition() {
+    public int getPosition() {
         return this.position;
     }
-    public void setPosition(String position) {
+    public void setPosition(int position) {
         this.position = position;
     }
+
 }
