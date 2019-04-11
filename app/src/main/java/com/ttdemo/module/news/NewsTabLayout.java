@@ -8,12 +8,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.ttdemo.R;
+import com.ttdemo.adapter.base.BasePagerAdapter;
 import com.ttdemo.bean.greendao.NewsChannelDao;
 import com.ttdemo.bean.greendao.NewsChannelTable;
 import com.ttdemo.module.base.BaseFragment;
+import com.ttdemo.module.news.articel.NewsArticleView;
+import com.ttdemo.module.wenda.articel.WendaArticleView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -30,6 +35,7 @@ public class NewsTabLayout extends BaseFragment {
     private NewsChannelDao dao = new NewsChannelDao();
     private List<Fragment> fragmentList;
     private List<String> titleList;
+    private Map<String, Fragment> map = new HashMap<>();
 
     public static NewsTabLayout getInstance() {
         if (instance == null) {
@@ -42,14 +48,45 @@ public class NewsTabLayout extends BaseFragment {
     @Override
     protected void initData() {
         initTab();
+        BasePagerAdapter adapter = new BasePagerAdapter(getChildFragmentManager(), fragmentList, titleList);
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(15);
     }
 
     private void initTab() {
         List<NewsChannelTable> channelList = dao.query(1);
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
-        if(channelList.size()==0){
+        if (channelList.size() == 0) {
+            dao.addData();
+            channelList = dao.query(1);
+        }
+        for (NewsChannelTable bean : channelList) {
+            Fragment fragment = null;
+            String channelId = bean.getId();
+            switch (channelId) {
+                case "question_and_answer":
+                    if (map.containsKey(channelId)) {
+                        fragmentList.add(map.get(channelId));
+                    } else {
+                        fragment = WendaArticleView.newInstance();
+                        fragmentList.add(fragment);
+                    }
+                    break;
 
+                default:
+                    if (map.containsKey(channelId)) {
+                        fragmentList.add(map.get(channelId));
+                    } else {
+                        fragment = NewsArticleView.newInstance();
+                        fragmentList.add(fragment);
+                    }
+                    break;
+            }
+            titleList.add(bean.getName());
+            if (fragment != null) {
+                map.put(channelId, fragment);
+            }
         }
     }
 
