@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +25,7 @@ public  abstract  class BaseFragment<T extends IBasePresenter> extends Fragment 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getlayout(),container,false);
          bind = ButterKnife.bind(this, view);
+         mPresenter = creatPresenter();
          initView(view);
          initData();
         return super.onCreateView(inflater, container, savedInstanceState);
@@ -33,11 +33,26 @@ public  abstract  class BaseFragment<T extends IBasePresenter> extends Fragment 
 
     protected abstract void initData();
 
-
+    protected abstract T creatPresenter();
     protected abstract void initView(View view);
 
     public  abstract  int getlayout();
-  
+
+    @Override
+    public void onHideLoading() {
+
+    }
+
+    @Override
+    public void onShowLoading() {
+
+    }
+
+    @Override
+    public void onShowNetError() {
+
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

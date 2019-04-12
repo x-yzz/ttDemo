@@ -11,7 +11,7 @@ import com.ttdemo.R;
 import com.ttdemo.adapter.base.BasePagerAdapter;
 import com.ttdemo.bean.greendao.NewsChannelDao;
 import com.ttdemo.bean.greendao.NewsChannelTable;
-import com.ttdemo.module.base.BaseFragment;
+import com.ttdemo.module.base.LazyLoadFragment;
 import com.ttdemo.module.news.articel.NewsArticleView;
 import com.ttdemo.module.wenda.articel.WendaArticleView;
 
@@ -22,7 +22,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 
-public class NewsTabLayout extends BaseFragment {
+public class NewsTabLayout extends LazyLoadFragment {
     private static NewsTabLayout instance = null;
     @BindView(R.id.tab_layout_news)
     TabLayout tab_layout;
@@ -104,4 +104,9 @@ public class NewsTabLayout extends BaseFragment {
         return R.layout.fragment_news_tab;
     }
 
+
+    @Override
+    public void fetchData() {
+
+    }
 }
